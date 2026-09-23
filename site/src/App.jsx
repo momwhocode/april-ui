@@ -1,9 +1,28 @@
 import { useState } from "react";
 import { Alert, AprilProvider, Button, IconButton, Tag, TextInput, version } from "april-ui";
 
-const catalogHref = import.meta.env.DEV ? "http://localhost:6006" : "/catalog/";
+const componentsHref = import.meta.env.DEV ? "http://localhost:6006" : "/components/";
 
 const pieces = ["Button", "Input", "Menu", "Dialog", "Table"];
+
+function ActionLink({ href, label, variant = "primary", trailing = false, onClick }) {
+  return (
+    <a className={`april-btn april-btn--${variant} april-btn--md`} href={href} onClick={onClick}>
+      <span className="april-btn__label">{label}</span>
+      {trailing ? (
+        <span className="april-btn__icon material-symbols-outlined" aria-hidden="true">
+          arrow_forward
+        </span>
+      ) : null}
+    </a>
+  );
+}
+
+function scrollToInstall(event) {
+  if (window.location.hash !== "#install") return;
+  event.preventDefault();
+  document.getElementById("install")?.scrollIntoView({ behavior: "smooth" });
+}
 
 export function App() {
   const [theme, setTheme] = useState("light");
@@ -18,23 +37,8 @@ export function App() {
           <p className="landing__wordmark april-text-style april-text-style--text-md-semibold">April</p>
           <Tag type="outlined" label={version} leadingIcon={false} trailingIcon={false} />
           <nav className="landing__nav" aria-label="Page">
-            <Button
-              label="Install"
-              variant="ghost"
-              leadingIcon={false}
-              trailingIcon={false}
-              onClick={() => document.getElementById("install")?.scrollIntoView({ behavior: "smooth" })}
-            />
-            <Button
-              label="Catalog"
-              variant="outlined"
-              leadingIcon={false}
-              trailingIcon
-              trailingIconName="arrow_forward"
-              onClick={() => {
-                window.location.assign(catalogHref);
-              }}
-            />
+            <ActionLink href="#install" label="Install" variant="ghost" onClick={scrollToInstall} />
+            <ActionLink href={componentsHref} label="Components" variant="outlined" trailing />
             <IconButton
               variant="ghost"
               icon={dark ? "light_mode" : "dark_mode"}
@@ -51,25 +55,11 @@ export function App() {
                 A React design system you can install
               </h1>
               <p className="landing__lede april-text-style april-text-style--text-md-regular">
-                Add the Vite plugin, wrap your app, and use the same buttons, inputs, and menus as the catalog.
+                Add the Vite plugin, wrap your app, and use the same buttons, inputs, and menus.
               </p>
               <div className="landing__actions">
-                <Button
-                  label="Open catalog"
-                  leadingIcon={false}
-                  trailingIcon
-                  trailingIconName="arrow_forward"
-                  onClick={() => {
-                    window.location.assign(catalogHref);
-                  }}
-                />
-                <Button
-                  label="See the install"
-                  variant="secondary"
-                  leadingIcon={false}
-                  trailingIcon={false}
-                  onClick={() => document.getElementById("install")?.scrollIntoView({ behavior: "smooth" })}
-                />
+                <ActionLink href={componentsHref} label="Open components" trailing />
+                <ActionLink href="#install" label="See the install" variant="secondary" onClick={scrollToInstall} />
               </div>
             </div>
 
@@ -86,7 +76,13 @@ export function App() {
                 ))}
               </div>
               {sent ? (
-                <Alert color="green" title="Welcome to April" description={email} showButtons={false} />
+                <Alert
+                  color="green"
+                  title="Welcome to April"
+                  description={email}
+                  showButtons={false}
+                  onDismiss={() => setSent(false)}
+                />
               ) : (
                 <>
                   <TextInput
@@ -97,8 +93,9 @@ export function App() {
                     placeholder="ada@april.dev"
                     leadingIcon
                     leadingIconName="mail"
+                    fullWidth
                   />
-                  <Button label="Continue" type="submit" leadingIcon={false} trailingIcon={false} />
+                  <Button label="Continue" type="submit" fullWidth leadingIcon={false} trailingIcon={false} />
                 </>
               )}
             </form>
@@ -108,23 +105,17 @@ export function App() {
             <article className="landing__step">
               <h2 className="april-text-style april-text-style--text-sm-semibold">1. Install</h2>
               <p className="april-text-style april-text-style--text-sm-regular">React 19 and React Router 7 are peer dependencies.</p>
-              <pre className="landing__code">
-                <code>npm install april-ui react react-dom react-router-dom</code>
-              </pre>
+              <pre className="landing__code"><code>{`npm install april-ui\n  react react-dom\n  react-router-dom`}</code></pre>
             </article>
             <article className="landing__step">
               <h2 className="april-text-style april-text-style--text-sm-semibold">2. Add the plugin</h2>
               <p className="april-text-style april-text-style--text-sm-regular">It injects the stylesheet, Inter, and Material Symbols.</p>
-              <pre className="landing__code">
-                <code>{`plugins: [react(), aprilUi()]`}</code>
-              </pre>
+              <pre className="landing__code"><code>{"plugins: [react(), aprilUi()]"}</code></pre>
             </article>
             <article className="landing__step">
               <h2 className="april-text-style april-text-style--text-sm-semibold">3. Wrap the app</h2>
               <p className="april-text-style april-text-style--text-sm-regular">AprilProvider sets the light or dark theme.</p>
-              <pre className="landing__code">
-                <code>{`<AprilProvider theme="light">`}</code>
-              </pre>
+              <pre className="landing__code"><code>{`<AprilProvider theme="light">`}</code></pre>
             </article>
           </section>
         </main>

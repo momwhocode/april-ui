@@ -1,7 +1,27 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .landing {
   min-height: 100vh;
   background: var(--color-background-surface-default);
   color: var(--color-foreground-text-text-default);
+}
+
+.landing a.april-btn--primary:visited {
+  color: var(--color-foreground-button-primary-default);
+}
+
+.landing a.april-btn--secondary:visited {
+  color: var(--color-foreground-button-secondary-default);
+}
+
+.landing a.april-btn--outlined:visited {
+  color: var(--color-foreground-button-outlined-default);
+}
+
+.landing a.april-btn--ghost:visited {
+  color: var(--color-foreground-button-ghost-default);
 }
 
 .landing__header,
@@ -74,6 +94,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   padding-bottom: 64px;
+  scroll-margin-top: 24px;
 }
 
 .landing__step {
@@ -95,8 +116,8 @@
 .landing__code {
   margin: 8px 0 0;
   padding: 12px;
-  overflow: auto;
-  white-space: pre-wrap;
+  overflow-x: auto;
+  white-space: pre;
   border-radius: var(--radius-radius-sm, 8px);
   background: var(--color-background-surface-default);
   color: var(--color-foreground-text-text-default);
@@ -116,5 +137,28 @@
   .landing__hero,
   .landing__steps {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .landing__header,
+  .landing__main,
+  .landing__footer {
+    width: min(1040px, calc(100% - 32px));
+  }
+
+  .landing__header {
+    flex-wrap: wrap;
+  }
+
+  .landing__nav {
+    flex-wrap: wrap;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .landing__actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 }

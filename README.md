@@ -4,9 +4,9 @@ April is a React design system. Install the package, add the Vite plugin, and us
 
 **Current version: 0.1.0**
 
-Storybook is the catalog. Run `npm run dev` for a local copy on port 6006.
+Storybook lists the components. Run `npm run dev` for a local copy on port 6006.
 
-[![April](docs/catalog.png)](https://april-ui.vercel.app/)
+[![April](docs/components.png)](https://april-ui.vercel.app/)
 
 ## Versioning
 
