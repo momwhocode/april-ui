@@ -1,5 +1,5 @@
 {
   "framework": null,
-  "buildCommand": "npm run build-storybook",
-  "outputDirectory": "storybook-static"
+  "buildCommand": "npm run build:web",
+  "outputDirectory": "site/dist"
 }

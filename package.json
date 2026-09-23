@@ -23,7 +23,9 @@
   },
   "scripts": {
     "dev": "storybook dev -p 6006",
+    "site": "vite --config site/vite.config.js",
     "build": "vite build",
+    "build:web": "vite build --config site/vite.config.js && npm run build-storybook -- --output-dir site/dist/catalog",
     "typecheck": "tsc --noEmit",
     "storybook": "NODE_OPTIONS=--disable-warning=DEP0205 storybook dev -p 6006",
     "build-storybook": "NODE_OPTIONS=--disable-warning=DEP0205 storybook build"

@@ -37,12 +37,6 @@ export function useInteractionState({ keyboardFocusOnly = false } = {}) {
   return { interaction, mouseBind, focusBind };
 }
 
-/** Maps pointer interaction flags to April `data-state` attribute values. */
-export function aprilButtonDataState(interaction, isDisabled) {
-  if (isDisabled || !interaction) return undefined;
-  return interaction === "active" ? "active-pressed" : interaction;
-}
-
 /** Blur after mouse click so buttons do not keep :focus; keyboard activation (detail 0) keeps focus. */
 export function blurOnMouseClick(onClick) {
   return (event) => {

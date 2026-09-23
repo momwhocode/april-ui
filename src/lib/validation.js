@@ -1,6 +1,4 @@
-/** Normalize phone to digits; strip a leading 91 country code when the value is 12 digits. */
+/** Keep digits from a phone value. */
 export function digitsOnlyPhone(value) {
-  const digits = String(value || "").replace(/\D/g, "");
-  if (digits.length === 12 && digits.startsWith("91")) return digits.slice(2);
-  return digits;
+  return String(value || "").replace(/\D/g, "");
 }

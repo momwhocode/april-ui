@@ -1,6 +1,3 @@
-/** Replaced at build time from package.json. */
-const version = __APRIL_VERSION__;
-
 const FONT_STYLESHEET =
   "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0..1,0&display=swap";
 
@@ -17,9 +14,11 @@ const FONT_STYLESHEET =
  * });
  * ```
  *
- * @param {{ injectStyles?: boolean, injectFonts?: boolean }} [options]
+ * @param {{ injectStyles?: boolean, injectFonts?: boolean, version?: string }} [options]
  */
 export function aprilUi(options = {}) {
+  /** Replaced at library build time from package.json when `options.version` is omitted. */
+  const version = options.version ?? __APRIL_VERSION__;
   const injectStyles = options.injectStyles !== false;
   const injectFonts = options.injectFonts !== false;
 

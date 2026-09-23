@@ -6,7 +6,7 @@ April is a React design system. Install the package, add the Vite plugin, and us
 
 Storybook is the catalog. Run `npm run dev` for a local copy on port 6006.
 
-[![April catalog](docs/catalog.png)](https://april-ui.vercel.app/)
+[![April](docs/catalog.png)](https://april-ui.vercel.app/)
 
 ## Versioning
 
@@ -126,6 +126,7 @@ import 'april-ui/styles.css'
 
 | Script | What it does |
 | --- | --- |
+| `npm run site` | Landing page on port 5173 |
 | `npm run dev` | Storybook on port 6006 |
 | `npm run build` | Library build in `dist/` |
 | `npm run typecheck` | `tsc --noEmit` |
