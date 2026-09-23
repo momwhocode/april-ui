@@ -91,7 +91,7 @@ export function parseListingDateTime(text) {
   return Number.isNaN(parsed.getTime()) ? null : parsed;
 }
 
-/** Listing datetime — e.g. `07 Apr-26 03:30 PM` (Figma tenants/billing tables). */
+/** Datetime — e.g. `07 Apr-26 03:30 PM`. */
 export function formatAprilDateTime(value) {
   if (value == null || value === "") return "—";
   if (isAlreadyFormattedListingDateTime(value)) return String(value).trim();
@@ -142,7 +142,7 @@ export function formatTableDateValue(columnId, value) {
     return formatAprilShortDate(value);
   }
 
-  // Tenants send full timestamps; users listings often send date-only values.
+  // Accept a full timestamp or a date-only value.
   if (columnId === "createdOn" || columnId === "lastActive") {
     const text = String(value).trim();
     if (text.includes("T") || /^\d{4}-\d{2}-\d{2}/.test(text) || isAlreadyFormattedListingDateTime(text)) {

@@ -2,7 +2,7 @@ export const BREADCRUMB_LINKS_VALUES = ["1", "2", "3", "overflown"];
 
 const DEFAULT_LINK_LABEL = "Button Label";
 
-export const DEFAULT_BREADCRUMB_PLAYGROUND_LABELS = ["Home", "Leads", "Settings"];
+export const DEFAULT_BREADCRUMB_PLAYGROUND_LABELS = ["Home", "Library", "Settings"];
 
 export function breadcrumbLinksSegmentCount(links = "2") {
   return links === "overflown" ? 3 : Math.min(3, Math.max(1, Number.parseInt(links, 10) || 1));

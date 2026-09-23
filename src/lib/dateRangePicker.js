@@ -32,15 +32,15 @@ export function addMonths(date, count) {
   return new Date(date.getFullYear(), date.getMonth() + count, 1);
 }
 
-export function daysInMonth(date) {
+function daysInMonth(date) {
   return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 }
 
-export function monthStartOffset(date) {
+function monthStartOffset(date) {
   return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
 }
 
-export function dayAriaLabel(date) {
+function dayAriaLabel(date) {
   return `${date.getDate()}, ${MONTH_NAMES[date.getMonth()]} ${date.getFullYear()}`;
 }
 
@@ -65,7 +65,7 @@ export function buildMonthCells(monthDate, { from, to, hoverDate } = {}) {
   return cells;
 }
 
-export function resolveDayState(date, from, to, hoverDate) {
+function resolveDayState(date, from, to, hoverDate) {
   const time = startOfDay(date).getTime();
   const fromDate = from ? startOfDay(from) : null;
   const toDate = to ? startOfDay(to) : null;

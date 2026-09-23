@@ -1,8 +1,6 @@
-/** Normalized multiselect filter values — Figma Juneshift 2715:31718 */
+/** Multiselect filter values for filter chips. */
 
-import { isDateRangeFilterActive } from "./dateFilter.js";
-
-export const ALL_FILTER_OPTION = { value: "all", label: "All" };
+const ALL_FILTER_OPTION = { value: "all", label: "All" };
 
 export function withAllFilterOption(options = []) {
   const normalized = options.map((option) =>
@@ -18,22 +16,17 @@ function specificOptionValues(options = []) {
     .map((option) => option.value);
 }
 
-/** Raw selected values from storage (never includes the All sentinel). */
-export function readFilterSelection(value) {
+function readFilterSelection(value) {
   if (Array.isArray(value)) return value.filter((entry) => entry && entry !== "all");
   if (!value || value === "all") return [];
   return [value];
 }
 
-export function normalizeFilterSelection(value) {
-  return readFilterSelection(value);
-}
-
-export function isNoneFilterSelected(value) {
+function isNoneFilterSelected(value) {
   return readFilterSelection(value).length === 0;
 }
 
-export function isAllFilterSelected(value, options = []) {
+function isAllFilterSelected(value, options = []) {
   const specific = specificOptionValues(options);
   const selected = readFilterSelection(value);
   return specific.length > 0 && specific.every((entry) => selected.includes(entry));
@@ -47,7 +40,7 @@ export function filterSelectionBadgeCount(value, options = []) {
   return selected.length;
 }
 
-export function isFilterActive(value, options = null) {
+function isFilterActive(value, options = null) {
   if (options) return filterSelectionBadgeCount(value, options) > 0;
   return readFilterSelection(value).length > 0;
 }
@@ -94,32 +87,6 @@ export function filterOptionsToSelectGroups(options, value) {
   ];
 }
 
-export function serializeFilterParams(filters = {}) {
-  const params = {};
-  for (const [key, value] of Object.entries(filters)) {
-    const selected = readFilterSelection(value);
-    if (selected.length > 0) params[key] = selected.join(",");
-  }
-  return params;
-}
-
-export function matchesFilterValue(userValue, filterValue, options = null) {
-  const selected = readFilterSelection(filterValue);
-  if (selected.length === 0) return true;
-  if (options && isAllFilterSelected(filterValue, options)) return true;
-  return selected.includes(userValue);
-}
-
 export function countActiveFilters(filterKeys, filterValues = {}) {
   return filterKeys.reduce((count, key) => count + (isFilterActive(filterValues[key]) ? 1 : 0), 0);
-}
-
-/** True when any filter chip has a selection. Search is not a chip filter. */
-export function hasSelectedListingFilters(filterValues = {}) {
-  return Object.values(filterValues).some((value) => {
-    if (value && typeof value === "object" && !Array.isArray(value) && "preset" in value) {
-      return isDateRangeFilterActive(value);
-    }
-    return isFilterActive(value);
-  });
 }

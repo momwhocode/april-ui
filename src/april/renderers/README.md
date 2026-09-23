@@ -1,7 +1,7 @@
 # April renderers
 
-Shared **constants**, **Storybook playground arg helpers** (`resolve*PlaygroundArgs`), and **tenant table cell renderers**.
+Shared **constants** and **Storybook playground arg helpers** (`resolve*PlaygroundArgs`).
 
-- App UI lives in `src/april/components/` (React).
-- Demo table rows: `src/fixtures/leadsTable.js` (Storybook table playground via `src/stories/_helpers/tableStory.js`).
+- Components live in `src/april/components/` (React).
+- Demo table rows: `src/fixtures/table.js` (Storybook table playground via `src/stories/_helpers/tableStory.js`).
 - Do not add HTML-string `april*` renderers here.

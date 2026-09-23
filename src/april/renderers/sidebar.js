@@ -18,28 +18,26 @@ export const DEFAULT_SETTINGS_MENU_GROUPS = [
   {
     groupLabel: "General",
     items: [
-      { id: "school-profile", label: "School Profile", icon: "post_add" },
+      { id: "profile", label: "Profile", icon: "badge" },
       { id: "billing", label: "Billing", icon: "credit_card" },
     ],
   },
   {
-    groupLabel: "Operations",
+    groupLabel: "Workspace",
     items: [
-      { id: "batches", label: "Batches", icon: "schedule" },
-      { id: "programs", label: "Programs", icon: "menu_book" },
-      { id: "fee-plans", label: "Fee Plans", icon: "payments" },
-      { id: "miscellaneous", label: "Miscellaneous", icon: "tune" },
+      { id: "preferences", label: "Preferences", icon: "tune" },
+      { id: "notifications", label: "Notifications", icon: "notifications" },
     ],
   },
   {
     groupLabel: "Access",
-    items: [{ id: "users-roles", label: "Users & Roles", icon: "admin_panel_settings" }],
+    items: [{ id: "members", label: "Members", icon: "group" }],
   },
 ];
 
 export const DEFAULT_SIDEBAR_ACTIVE_ITEM = {
   main: "home",
-  settings: "school-profile",
+  settings: "profile",
 };
 
 export function resolveSidebarMenuData({ variant = "main", topItems, groups, bottomItems } = {}) {

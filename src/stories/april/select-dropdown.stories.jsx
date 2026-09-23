@@ -51,8 +51,8 @@ export const StatusFilterMultiselect = {
   ),
 };
 
-export const PlanStatusSingle = {
-  name: "Plan status (single)",
+export const SingleSelect = {
+  name: "Single select",
   args: { variant: "single" },
   render: (args) => (
     <StoryFrame>

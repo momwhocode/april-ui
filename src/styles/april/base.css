@@ -70,33 +70,8 @@ body,
   min-height: 100dvh;
 }
 
-#root > .page-loader--full,
-.shdc-public-shell > .page-loader,
-.platform-marketing > .page-loader {
+#root > .page-loader--full {
   flex: 1 1 auto;
-}
-
-.superadmin-shell__main > .page-loader,
-.superadmin-page .page-loader {
-  flex: 1 1 0;
-  min-height: 0;
-}
-
-.superadmin-page > *:has(> .page-loader) {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  min-height: 0;
-  height: 100%;
-}
-
-/* Auth body already centers its children — keep the mark shrink-wrapped. */
-.superadmin-auth__body > .page-loader {
-  flex: 0 0 auto;
-  width: auto;
-  min-height: 0;
-  padding: 0;
-  background: transparent;
 }
 
 /*
@@ -115,32 +90,13 @@ body,
   --app-loader-size: 20px;
 }
 
-.pattern-page__scroll[aria-busy="true"]:empty,
-.superadmin-users-roles-form[aria-busy="true"]:empty,
-.user-detail-page[aria-busy="true"]:empty,
-.superadmin-page__loading[aria-busy="true"]:empty,
-.superadmin-page__region-skeleton[aria-busy="true"]:empty,
-.space-detail-page__feed[aria-busy="true"]:empty,
-.space-detail-page__empty-skeleton[aria-busy="true"]:empty,
-.course-detail-page__empty-skeleton[aria-busy="true"]:empty,
-.space-post-editor--loading[aria-busy="true"]:empty,
-.plan-upgrade-summary[aria-busy="true"]:empty {
-  flex: 1 1 auto;
-  min-height: 0;
-}
-
-/* Canvas must match main panel white — grey `surface-raised` on body/html
-   was showing through create/edit forms (overscroll + layout gaps). Sidebar
-   paints its own raised grey. */
+/* Canvas must match the main panel. The sidebar paints its own raised surface. */
 html {
   background: var(--color-background-surface-default);
   scrollbar-gutter: stable;
 }
 
-/*
-  App shells own scrolling. Lock via html[data-app-chrome] (boot + useAppDocumentChrome),
-  not :has(.superadmin-shell) — that only applies after React mounts.
-*/
+/* App shells own scrolling when html[data-app-chrome="shell"] is set. */
 html[data-app-chrome="shell"],
 html[data-app-chrome="shell"] body,
 html[data-app-chrome="shell"] #root {

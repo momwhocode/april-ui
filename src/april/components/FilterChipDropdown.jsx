@@ -14,7 +14,7 @@ function normalizeOptions(options) {
   return options.map((option) => (typeof option === "string" ? { value: option, label: option } : option));
 }
 
-/** Filter chip with multiselect checkbox dropdown — Figma Juneshift 2715:31718 */
+/** Filter chip with a multiselect menu. */
 export function FilterChipDropdown({
   id = "filter-chip-dropdown",
   filterLabel = "Filter",

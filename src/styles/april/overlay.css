@@ -102,31 +102,6 @@
   min-height: 0;
 }
 
-.april-modal__container:has(> .superadmin-form-row) {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  min-width: 0;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Side-by-side form rows need a tighter label column inside 400–600px modals. */
-.april-modal__container > .superadmin-form-row {
-  grid-template-columns: minmax(104px, 132px) minmax(0, 1fr);
-  min-width: 0;
-}
-
-.april-modal__container .superadmin-form-row__field .april-text-input,
-.april-modal__container .superadmin-form-row__field .april-textarea-input,
-.april-modal__container .superadmin-form-row__field .april-form-select-field,
-.april-modal__container .superadmin-form-row__field .april-select-input,
-.april-modal__container .superadmin-form-row__field .april-date-picker-input {
-  width: 100%;
-  max-width: none;
-  min-width: 0;
-}
-
 .april-modal__container--empty .april-modal__container-placeholder {
   min-height: 338px;
   border: 1px dashed var(--color-border-border-gray-light);

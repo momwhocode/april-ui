@@ -36,7 +36,7 @@ export default {
     docs: {
       description: {
         component:
-          "Filter chips header above table (Figma). Composes overflow + dropdown base filter chips, Clear All, 320px search, and outlined md `add_column_right` columns button. See `.cursor/rules/filter-chips-header.mdc`.",
+          "Filter chips header above a table. Composes overflow and dropdown chips, Clear all, search, and a columns button.",
       },
     },
   },

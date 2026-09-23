@@ -271,7 +271,6 @@ function skeletonKindForColumn(column, extensions) {
   if (column.kind === "reorder") return "actions";
   if (column.kind === "status") return "status";
   if (column.kind === "actions") return "actions";
-  if (column.id === "assignedTo" || column.id === "referredBy") return "person";
   if (isTableDateColumn(column.id)) return "datetime";
   return "text";
 }
@@ -428,7 +427,7 @@ function TableBodyCell({
     );
   }
 
-  if (column.kind === "person" || column.id === "assignedTo" || column.id === "referredBy") {
+  if (column.kind === "person") {
     return (
       <td className={classes}>
         <TablePersonCell person={row[column.id]} />

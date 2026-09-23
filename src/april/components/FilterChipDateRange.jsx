@@ -16,7 +16,7 @@ const CUSTOM_MENU_ESTIMATED_WIDTH = 680;
 const CUSTOM_MENU_ESTIMATED_HEIGHT = 420;
 const PRESET_MENU_ESTIMATED_HEIGHT = 280;
 
-/** Filter chip with date-range preset dropdown — Figma Juneshift 2751:39601 */
+/** Filter chip with a date-range preset menu. */
 export function FilterChipDateRange({
   id = "filter-chip-date-range",
   filterLabel = "Created On",

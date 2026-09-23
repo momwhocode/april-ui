@@ -2,15 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { MODAL_CONTENT_SIZES, resolveModalPlaygroundArgs } from "../renderers/modal.js";
 
 const DEMO_PLANS = [
-  { id: "Trial", title: "Trial", badge: "Trial", price: "Free", priceUnit: "/ Month", description: "Start a trial and explore the product." },
-  { id: "Base", title: "Base", price: "₹8,500", priceUnit: "/ Month", description: "Core workflows for a growing team." },
-  { id: "Pro", title: "Pro", price: "₹18,000", priceUnit: "/ Month", description: "Higher limits and dedicated support." },
+  { id: "Trial", title: "Trial", badge: "Trial", price: "Free", priceUnit: "/ month", description: "Try the product before you choose a plan." },
+  { id: "Base", title: "Base", price: "$12", priceUnit: "/ month", description: "The essentials for a small team." },
+  { id: "Pro", title: "Pro", price: "$29", priceUnit: "/ month", description: "Higher limits and priority support." },
 ];
 
 const DEMO_STATUS_OPTIONS = [
   { value: "Active", label: "Active", tagType: "success" },
-  { value: "Pending setup", label: "Pending setup", tagType: "ghost" },
-  { value: "Suspended", label: "Suspended", tagType: "error" },
+  { value: "Draft", label: "Draft", tagType: "ghost" },
+  { value: "Archived", label: "Archived", tagType: "error" },
 ];
 import { Button } from "./Button.jsx";
 import { IconButton } from "./IconButton.jsx";
@@ -70,10 +70,10 @@ function ModalFilterContainer() {
   return (
     <div className="april-modal__container april-modal__container--filter" data-april-modal-container>
       <div className="april-modal__form-grid">
-        {field("Course", "modal-filter-course")}
-        {field("Source", "modal-filter-source")}
-        {field("School/College", "modal-filter-school")}
-        {field("Date Range", "modal-filter-date-range")}
+        {field("Status", "modal-filter-status")}
+        {field("Category", "modal-filter-category")}
+        {field("Owner", "modal-filter-owner")}
+        {field("Date range", "modal-filter-date-range")}
       </div>
     </div>
   );

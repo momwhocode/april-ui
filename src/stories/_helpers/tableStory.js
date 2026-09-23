@@ -1,8 +1,8 @@
-import { LEADS_TABLE_ROWS } from "../../fixtures/leadsTable.js";
+import { TABLE_ROWS } from "../../fixtures/table.js";
 
 /** Table story constants — Storybook only. */
 
-export { DEFAULT_TABLE_COLUMNS } from "../../fixtures/leadsTable.js";
+export { DEFAULT_TABLE_COLUMNS } from "../../fixtures/table.js";
 
 export const TABLE_PLAYGROUND_STATES = [
   { value: "default", label: "Default" },
@@ -12,4 +12,4 @@ export const TABLE_PLAYGROUND_STATES = [
 ];
 
 export const TABLE_LOADED_ROWS_MIN = 1;
-export const TABLE_LOADED_ROWS_MAX = LEADS_TABLE_ROWS.length;
+export const TABLE_LOADED_ROWS_MAX = TABLE_ROWS.length;

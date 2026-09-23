@@ -3,9 +3,9 @@ import { PlanCardPicker } from "../../april/components/PlanCardPicker.jsx";
 import { StoryFrame } from "../_helpers/StoryFrame.jsx";
 
 const PLANS = [
-  { id: "Trial", title: "Trial", badge: "Trial", price: "Free", priceUnit: "/ Month", description: "Start a trial and explore the product." },
-  { id: "Base", title: "Base", price: "₹8,500", priceUnit: "/ Month", description: "Core workflows for a growing team." },
-  { id: "Pro", title: "Pro", price: "₹18,000", priceUnit: "/ Month", description: "Higher limits and dedicated support." },
+  { id: "Trial", title: "Trial", badge: "Trial", price: "Free", priceUnit: "/ month", description: "Try the product before you choose a plan." },
+  { id: "Base", title: "Base", price: "$12", priceUnit: "/ month", description: "The essentials for a small team." },
+  { id: "Pro", title: "Pro", price: "$29", priceUnit: "/ month", description: "Higher limits and priority support." },
 ];
 
 export default {

@@ -706,11 +706,6 @@
   object-fit: contain;
 }
 
-.april-sidebar__logo-image--tenant {
-  height: auto;
-  max-height: 48px;
-}
-
 .april-sidebar__nav .april-menu-option {
   text-decoration: none;
   color: inherit;
@@ -1064,7 +1059,7 @@
   line-height: 1;
 }
 
-/* Course/space markers share the same 20×20 leading slot as material icons. */
+/* Markers share the same 20×20 leading slot as material icons. */
 .april-menu-option__icon--marker {
   width: 20px;
   height: 20px;

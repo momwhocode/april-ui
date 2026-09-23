@@ -19,12 +19,7 @@ export function defaultVisibleColumnIds(columns = []) {
   return toggleableColumns(columns).map((column) => column.id);
 }
 
-export function filterTableColumns(columns = [], visibleColumnIds = []) {
-  const visible = new Set(visibleColumnIds);
-  return columns.filter((column) => isAlwaysVisibleColumn(column) || visible.has(column.id));
-}
-
-export function toggleColumnVisibility(visibleIds, columnId) {
+function toggleColumnVisibility(visibleIds, columnId) {
   if (columnId === "all") {
     return visibleIds;
   }
@@ -35,12 +30,11 @@ export function toggleColumnVisibility(visibleIds, columnId) {
   return [...visibleIds, columnId];
 }
 
-export function areAllColumnsVisible(visibleIds = [], allIds = []) {
+function areAllColumnsVisible(visibleIds = [], allIds = []) {
   return allIds.length > 0 && allIds.every((id) => visibleIds.includes(id));
 }
 
-/** Apply a columns-menu toggle, including the synthetic "All" select/unselect option. */
-export function applyColumnVisibilityToggle(visibleIds, columnId, allIds = []) {
+function applyColumnVisibilityToggle(visibleIds, columnId, allIds = []) {
   if (columnId === "all") {
     if (!allIds.length) return visibleIds;
     return areAllColumnsVisible(visibleIds, allIds) ? [] : [...allIds];

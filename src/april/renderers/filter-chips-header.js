@@ -10,10 +10,10 @@ export const FILTER_CHIPS_HEADER_COLUMNS_ICON = "add_column_right";
 
 /** Overflow modal fields when chip config omits `overflowFilters`. */
 export const DEFAULT_OVERFLOW_FILTER_FIELDS = [
-  { filterKey: "course", filterLabel: "Course" },
-  { filterKey: "source", filterLabel: "Source" },
-  { filterKey: "school", filterLabel: "School/College" },
-  { filterKey: "dateRange", filterLabel: "Date Range" },
+  { filterKey: "status", filterLabel: "Status" },
+  { filterKey: "category", filterLabel: "Category" },
+  { filterKey: "owner", filterLabel: "Owner" },
+  { filterKey: "dateRange", filterLabel: "Date range" },
 ];
 
 export const DEFAULT_FILTER_CHIPS_HEADER_CHIPS = [

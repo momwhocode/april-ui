@@ -1,6 +1,6 @@
 import { FilterChipsHeaderDemo } from "../_helpers/filterChipsHeaderStory.jsx";
 import { Table } from "../../april/components/Table.jsx";
-import { DEFAULT_TABLE_COLUMNS, LEADS_TABLE_ROWS } from "../../fixtures/leadsTable.js";
+import { DEFAULT_TABLE_COLUMNS, TABLE_ROWS } from "../../fixtures/table.js";
 import {
   TABLE_LOADED_ROWS_MAX,
   TABLE_LOADED_ROWS_MIN,
@@ -76,7 +76,7 @@ export const Playground = {
         <Table
           type={args.state}
           columns={DEFAULT_TABLE_COLUMNS}
-          rows={LEADS_TABLE_ROWS}
+          rows={TABLE_ROWS}
           loadedRows={args.loadedRows}
         />
       </div>

@@ -69,11 +69,11 @@ export const Playground = {
   ),
 };
 
-export const TenantCreatedToast = {
-  name: "Tenant Created Toast",
+export const SavedToast = {
+  name: "Saved toast",
   render: () => (
     <StoryFrame>
-      <PageToast title="Tenant created" onDismiss={() => {}} />
+      <PageToast title="Changes saved" onDismiss={() => {}} />
     </StoryFrame>
   ),
 };

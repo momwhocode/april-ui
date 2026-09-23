@@ -55,7 +55,7 @@ function CalendarMonthPanel({ monthDate, from, to, hoverDate, idPrefix, onDaySel
   );
 }
 
-/** Interactive two-month range calendar — Figma Juneshift 2751:39601 */
+/** Two-month range calendar. */
 export function DateRangePicker({
   id = "date-range-picker",
   from = "",

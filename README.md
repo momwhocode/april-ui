@@ -4,7 +4,7 @@ April is a React design system. Install the package, add the Vite plugin, and us
 
 **Current version: 0.1.0**
 
-Storybook is the catalog: `npm run dev`.
+Storybook is the catalog. Run `npm run dev`, then open [localhost:6006](http://localhost:6006). Previews of each component are below.
 
 ## Versioning
 
@@ -120,9 +120,104 @@ import 'april-ui/styles.css'
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0..1,0&display=swap" />
 ```
 
-## What's included
+## Components
 
-Buttons, icon buttons, text inputs, textarea, select, OTP, tag input, checkbox, radio, switch, badges, tags, avatars, alerts, toasts, spinner, progress, menus, dialogs, tabs, tables, breadcrumbs, sidebar, pagination, date and time pickers, and filter chips.
+Each image links to that story. Start Storybook with `npm run dev` first; the links use port 6006.
+
+<table>
+<tr>
+<td align="center" width="50%">
+<a href="http://localhost:6006/?path=/story/april-system-button--playground"><img src="docs/components/button.png" alt="Button" width="240"><br><strong>Button</strong></a>
+</td>
+<td align="center" width="50%">
+<a href="http://localhost:6006/?path=/story/april-system-icon-button--playground"><img src="docs/components/icon-button.png" alt="Icon button" width="80"><br><strong>Icon button</strong></a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/april-system-text-input--playground"><img src="docs/components/text-input.png" alt="Text input" width="320"><br><strong>Text input</strong></a>
+</td>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/april-system-textarea-input--playground"><img src="docs/components/textarea.png" alt="Textarea" width="320"><br><strong>Textarea</strong></a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/april-system-select-input--playground"><img src="docs/components/select.png" alt="Select" width="320"><br><strong>Select</strong></a>
+</td>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/april-system-otp-input--playground"><img src="docs/components/otp.png" alt="OTP input" width="260"><br><strong>OTP input</strong></a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/april-system-date-picker-input--playground"><img src="docs/components/date-picker.png" alt="Date picker" width="280"><br><strong>Date picker</strong></a>
+</td>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/april-system-selector--playground"><img src="docs/components/selector.png" alt="Selector" width="200"><br><strong>Selector</strong></a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/april-system-badge--playground"><img src="docs/components/badge.png" alt="Badge" width="64"><br><strong>Badge</strong></a>
+</td>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/april-system-tag--playground"><img src="docs/components/tag.png" alt="Tag" width="140"><br><strong>Tag</strong></a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/april-system-alert--playground"><img src="docs/components/alert.png" alt="Alert" width="420"><br><strong>Alert</strong></a>
+</td>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/april-system-avatar--gallery"><img src="docs/components/avatar.png" alt="Avatar" width="420"><br><strong>Avatar</strong></a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/april-system-tabs--playground"><img src="docs/components/tabs.png" alt="Tabs" width="420"><br><strong>Tabs</strong></a>
+</td>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/april-system-progress-bar--gallery"><img src="docs/components/progress.png" alt="Progress bar" width="320"><br><strong>Progress bar</strong></a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/april-system-spinner--playground"><img src="docs/components/spinner.png" alt="Spinner" width="48"><br><strong>Spinner</strong></a>
+</td>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/april-system-menu-dropdown--menu-dropdown-story"><img src="docs/components/menu.png" alt="Menu" width="320"><br><strong>Menu</strong></a>
+</td>
+</tr>
+<tr>
+<td align="center" colspan="2">
+<a href="http://localhost:6006/?path=/story/april-system-breadcrumb--breadcrumb-header-story"><img src="docs/components/breadcrumb.png" alt="Breadcrumb" width="640"><br><strong>Breadcrumb</strong></a>
+</td>
+</tr>
+<tr>
+<td align="center" colspan="2">
+<a href="http://localhost:6006/?path=/story/april-system-filter-chips-header--playground"><img src="docs/components/filter-chips.png" alt="Filter chips" width="640"><br><strong>Filter chips</strong></a>
+</td>
+</tr>
+<tr>
+<td align="center" colspan="2">
+<a href="http://localhost:6006/?path=/story/april-system-plan-card-picker--playground"><img src="docs/components/plan-cards.png" alt="Plan cards" width="560"><br><strong>Plan cards</strong></a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/ui-patterns-modal--playground"><img src="docs/components/modal.png" alt="Modal" width="360"><br><strong>Modal</strong></a>
+</td>
+<td align="center">
+<a href="http://localhost:6006/?path=/story/april-system-sidebar--playground"><img src="docs/components/sidebar.png" alt="Sidebar" width="180"><br><strong>Sidebar</strong></a>
+</td>
+</tr>
+<tr>
+<td align="center" colspan="2">
+<a href="http://localhost:6006/?path=/story/april-system-table--playground"><img src="docs/components/table.png" alt="Table" width="720"><br><strong>Table</strong></a>
+</td>
+</tr>
+</table>
 
 ## Scripts
 

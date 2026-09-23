@@ -1,5 +1,4 @@
-/* Student portal theme — missing semantic aliases + dark remaps.
-   Dark mode applies via documentElement[data-theme="dark"] while a student session is active. */
+/* Theme tokens. Dark mode applies when <html data-theme="dark"> is set. */
 
 :root,
 html[data-theme="light"] {
@@ -283,19 +282,11 @@ html[data-theme="dark"] .april-kpi-header__skeleton {
   background: var(--gray-gray-800);
 }
 
-html[data-theme="dark"] .space-post-card,
 html[data-theme="dark"] .april-select-dropdown,
 html[data-theme="dark"] .april-menu-dropdown {
   border: 1px solid var(--color-border-border-gray-dark);
 }
 
-/* List/menu hovers must keep light text on a dark fill — never a light wash. */
-html[data-theme="dark"] .sidebar-lesson-item:hover,
-html[data-theme="dark"] .student-lesson-sidebar__chapter-header:hover,
-html[data-theme="dark"] .course-content-chapter__lesson:hover,
-html[data-theme="dark"] .student-home-upcoming-item:not(:disabled):hover,
-html[data-theme="dark"] .mention-textarea__suggestion:hover,
-html[data-theme="dark"] .mention-textarea__suggestion--active,
 html[data-theme="dark"]
   .april-menu-option:not(.april-menu-option--group):not(.april-menu-option--disabled):hover,
 html[data-theme="dark"] .april-menu-option--hover:not(.april-menu-option--disabled),
@@ -311,110 +302,19 @@ html[data-theme="dark"]
   color: var(--color-foreground-text-text-default);
 }
 
-html[data-theme="dark"] .sidebar-lesson-item:hover .sidebar-lesson-item__label,
-html[data-theme="dark"] .student-lesson-sidebar__chapter-header:hover .student-lesson-sidebar__chapter-title,
-html[data-theme="dark"] .course-content-chapter__lesson:hover .course-content-chapter__lesson-title,
 html[data-theme="dark"] .april-menu-option:hover .april-menu-option__label,
 html[data-theme="dark"] .april-menu-option--hover .april-menu-option__label,
 html[data-theme="dark"] .april-menu-option:hover .april-menu-option__icon,
-html[data-theme="dark"] .april-menu-option--hover .april-menu-option__icon,
-html[data-theme="dark"] .april-sidebar--tenant-flat .tenant-sidebar__create:hover .april-menu-option__label,
-html[data-theme="dark"]
-  .april-sidebar--tenant-flat
-  .tenant-sidebar__leaf.april-menu-option--active
-  .april-menu-option__label {
+html[data-theme="dark"] .april-menu-option--hover .april-menu-option__icon {
   color: var(--color-foreground-text-text-default);
 }
 
-html[data-theme="dark"] .sidebar-lesson-item--active,
-html[data-theme="dark"] .sidebar-lesson-item--active:hover {
-  background: var(--color-background-button-secondary-default);
-}
-
-html[data-theme="dark"] .sidebar-lesson-item--active .sidebar-lesson-item__label,
-html[data-theme="dark"] .sidebar-lesson-item--active:hover .sidebar-lesson-item__label {
-  color: var(--primary-primary-400);
-}
-
-html[data-theme="dark"] .space-post-card__rich a,
-html[data-theme="dark"] .student-lesson-detail__rich a,
-html[data-theme="dark"] .course-lesson-rte__content a,
-html[data-theme="dark"] .md-token--link,
-html[data-theme="dark"] .md-token--image,
-html[data-theme="dark"] .april-notification-row__message--link,
-html[data-theme="dark"] .post-author-profile-modal__link-value {
-  color: var(--color-foreground-text-text-link);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-html[data-theme="dark"] .space-post-card__rich a:hover,
-html[data-theme="dark"] .student-lesson-detail__rich a:hover,
-html[data-theme="dark"] .course-lesson-rte__content a:hover,
-html[data-theme="dark"] .post-author-profile-modal__link-row:hover .post-author-profile-modal__link-value {
-  color: var(--color-foreground-button-link-hover);
-}
-
-html[data-theme="dark"] .post-author-profile-modal__link-arrow,
-html[data-theme="dark"] .space-post-card__attachment,
-html[data-theme="dark"] .space-post-comment__attachment {
-  color: var(--color-foreground-text-text-link);
-}
-
-html[data-theme="dark"] .student-home-course-card__media,
-html[data-theme="dark"] .student-home-upcoming-item__icon {
-  background: var(--color-background-surface-raised);
-}
-
-html[data-theme="dark"] .course-lesson-rte__menu-btn:hover:not(:disabled),
-html[data-theme="dark"] .course-lesson-rte__insert-toggle:hover {
-  background: var(--color-background-menu-options-hover);
-  color: var(--color-foreground-icon-icon-primary);
-}
-
-html[data-theme="dark"] .course-lesson-rte__menu-btn--active,
-html[data-theme="dark"] .course-lesson-rte__insert-toggle--open {
-  background: var(--color-background-background-primary-subtle);
-  color: var(--color-foreground-text-text-brand);
-}
-
-html[data-theme="dark"] .lesson-quiz-player__choice.april-selector-field--checked,
-html[data-theme="dark"] .form-pattern-fields__access-card--selected {
-  background: var(--color-background-background-primary-subtle);
-}
-
-html[data-theme="dark"] .mention-textarea__suggestions {
-  background: var(--color-background-bg-primary);
-  border-color: var(--color-border-border-secondary);
-  box-shadow: var(--april-shadow-cards-menus);
-}
-
-html[data-theme="dark"] .mention-textarea__username {
-  color: var(--color-foreground-text-text-tertiary);
-}
-
-html[data-theme="dark"] .student-home-course-card--link:hover .student-home-course-card__title,
-html[data-theme="dark"] .student-home-section__view-all.april-btn,
-html[data-theme="dark"] .space-mention {
-  color: var(--color-foreground-text-text-link);
-}
-
-html[data-theme="dark"] .emoji-picker-popover__tab:hover,
-html[data-theme="dark"] .emoji-picker-popover__emoji:hover,
-html[data-theme="dark"] button.space-post-card__pin:hover {
-  background: var(--color-background-menu-options-hover);
-  color: var(--color-foreground-text-text-default);
-}
-
-/* Inherited text: keep copy readable even when a rule still ships a light hex fallback. */
 html[data-theme="dark"],
 html[data-theme="dark"] body {
   background: var(--color-background-surface-default);
   color: var(--color-foreground-text-text-default);
 }
 
-html[data-theme="dark"] .superadmin-shell--tenant,
-html[data-theme="dark"] .superadmin-page,
 html[data-theme="dark"] .april-modal,
 html[data-theme="dark"] .april-menu-dropdown,
 html[data-theme="dark"] .april-select-dropdown,
@@ -423,10 +323,7 @@ html[data-theme="dark"] .april-page-title-nav-header__title,
 html[data-theme="dark"] .april-breadcrumb-links,
 html[data-theme="dark"] .april-table__cell,
 html[data-theme="dark"] .april-table__cell-text,
-html[data-theme="dark"] .april-table__drag-overlay-label,
-html[data-theme="dark"] .student-lesson-detail__rich,
-html[data-theme="dark"] .space-post-card__rich,
-html[data-theme="dark"] .course-lesson-rte__content {
+html[data-theme="dark"] .april-table__drag-overlay-label {
   color: var(--color-foreground-text-text-default);
 }
 
@@ -483,36 +380,6 @@ html[data-theme="dark"] ::selection {
   color: var(--gray-gray-50);
 }
 
-html[data-theme="dark"] .system-error-page:not(.system-error-page--not-found) {
-  background: var(--color-background-surface-default);
-}
-
-html[data-theme="dark"] .system-error-page:not(.system-error-page--not-found) .system-error-page__title,
-html[data-theme="dark"]
-  .system-error-page:not(.system-error-page--not-found)
-  .system-error-page__description {
-  color: var(--color-foreground-text-text-default);
-}
-
-html[data-theme="dark"]
-  .system-error-page:not(.system-error-page--not-found)
-  .system-error-page__description {
-  color: var(--color-foreground-text-text-secondary);
-}
-
-html[data-theme="dark"] .tenant-shell__mobile-bar {
-  background: var(--color-background-surface-default);
-  border-bottom-color: var(--color-border-border-gray-dark);
-}
-
 html[data-theme="dark"] .page-loader {
   background: var(--color-background-surface-default);
-}
-
-html[data-theme="dark"] .lesson-quiz-player__result[data-correct="true"] {
-  color: var(--color-foreground-text-text-success);
-}
-
-html[data-theme="dark"] .lesson-quiz-player__result[data-correct="false"] {
-  color: var(--color-foreground-text-text-error);
 }
