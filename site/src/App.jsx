@@ -5,12 +5,67 @@ const componentsHref = import.meta.env.DEV ? "http://localhost:6006" : "/compone
 
 const pieces = ["Button", "Input", "Menu", "Dialog", "Table"];
 
+const installCommand = "npm install april-ui react react-dom react-router-dom";
+const pluginSnippet = `import { aprilUi } from "april-ui/vite"
+plugins: [react(), aprilUi()]`;
+const providerSnippet = `import { AprilProvider } from "april-ui"
+<AprilProvider theme="light">
+  <App />
+</AprilProvider>`;
+
+function CodeBlock({ value }) {
+  const [copied, setCopied] = useState(false);
+
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(value);
+    } catch {
+      const area = document.createElement("textarea");
+      area.value = value;
+      area.setAttribute("readonly", "");
+      area.style.position = "fixed";
+      area.style.left = "-9999px";
+      document.body.append(area);
+      area.select();
+      document.execCommand("copy");
+      area.remove();
+    }
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1600);
+  }
+
+  const parts = value.split(/(\s+)/);
+
+  return (
+    <div className="landing__code">
+      <pre>
+        <code>
+          {parts.map((part, index) =>
+            /\s/.test(part) ? part : (
+              <span key={index} className="landing__token">
+                {part}
+              </span>
+            ),
+          )}
+        </code>
+      </pre>
+      <IconButton
+        variant="ghost"
+        size="sm"
+        icon={copied ? "check" : "content_copy"}
+        ariaLabel={copied ? "Copied" : "Copy"}
+        onClick={copy}
+      />
+    </div>
+  );
+}
+
 function ActionLink({ href, label, variant = "primary", trailing = false, onClick }) {
   return (
     <a className={`april-btn april-btn--${variant} april-btn--md`} href={href} onClick={onClick}>
       <span className="april-btn__label">{label}</span>
       {trailing ? (
-        <span className="april-btn__icon material-symbols-outlined" aria-hidden="true">
+        <span className="april-btn__icon material-symbols-outlined april-icon" aria-hidden="true">
           arrow_forward
         </span>
       ) : null}
@@ -105,17 +160,17 @@ export function App() {
             <article className="landing__step">
               <h2 className="april-text-style april-text-style--text-sm-semibold">1. Install</h2>
               <p className="april-text-style april-text-style--text-sm-regular">React 19 and React Router 7 are peer dependencies.</p>
-              <pre className="landing__code"><code>{`npm install april-ui\n  react react-dom\n  react-router-dom`}</code></pre>
+              <CodeBlock value={installCommand} />
             </article>
             <article className="landing__step">
               <h2 className="april-text-style april-text-style--text-sm-semibold">2. Add the plugin</h2>
               <p className="april-text-style april-text-style--text-sm-regular">It injects the stylesheet, Inter, and Material Symbols.</p>
-              <pre className="landing__code"><code>{"plugins: [react(), aprilUi()]"}</code></pre>
+              <CodeBlock value={pluginSnippet} />
             </article>
             <article className="landing__step">
               <h2 className="april-text-style april-text-style--text-sm-semibold">3. Wrap the app</h2>
               <p className="april-text-style april-text-style--text-sm-regular">AprilProvider sets the light or dark theme.</p>
-              <pre className="landing__code"><code>{`<AprilProvider theme="light">`}</code></pre>
+              <CodeBlock value={providerSnippet} />
             </article>
           </section>
         </main>
