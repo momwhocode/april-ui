@@ -68,9 +68,15 @@ function CodeBlock({ value }) {
   );
 }
 
-function ActionLink({ href, label, variant = "primary", trailing = false, onClick, className = "" }) {
+function ActionLink({ href, label, variant = "primary", trailing = false, onClick, className = "", newTab = false }) {
   return (
-    <a className={`april-btn april-btn--${variant} april-btn--md ${className}`.trim()} href={href} onClick={onClick}>
+    <a
+      className={`april-btn april-btn--${variant} april-btn--md ${className}`.trim()}
+      href={href}
+      onClick={onClick}
+      target={newTab ? "_blank" : undefined}
+      rel={newTab ? "noreferrer" : undefined}
+    >
       <span className="april-btn__label">{label}</span>
       {trailing ? (
         <span className="april-btn__icon material-symbols-outlined april-icon" aria-hidden="true">
@@ -119,7 +125,7 @@ export function App() {
             <nav className="landing__nav" aria-label="Page">
               <a className="landing__nav-link" href="#components">Components</a>
               <a className="landing__nav-link" href="#install" onClick={scrollToInstall}>Install</a>
-              <a className="landing__nav-link" href={componentsHref}>Storybook</a>
+              <a className="landing__nav-link" href={componentsHref} target="_blank" rel="noreferrer">Storybook</a>
             </nav>
             <div className="landing__header-actions">
               <Tag type="outlined" label={version} leadingIcon={false} trailingIcon={false} />
@@ -129,7 +135,7 @@ export function App() {
                 ariaLabel={dark ? "Use light theme" : "Use dark theme"}
                 onClick={() => setTheme(dark ? "light" : "dark")}
               />
-              <ActionLink className="landing__pill" href={componentsHref} label="Open components" trailing />
+              <ActionLink className="landing__pill" href={componentsHref} label="Open components" trailing newTab />
             </div>
           </div>
         </header>
@@ -142,7 +148,7 @@ export function App() {
               </h1>
               <div className="landing__hero-row">
                 <div className="landing__actions">
-                  <ActionLink className="landing__pill" href={componentsHref} label="Open components" trailing />
+                  <ActionLink className="landing__pill" href={componentsHref} label="Open components" trailing newTab />
                   <ActionLink className="landing__pill" href="#install" label="See the install" variant="secondary" onClick={scrollToInstall} />
                 </div>
                 <p className="landing__lede april-text-style april-text-style--text-md-regular">
@@ -210,7 +216,7 @@ export function App() {
             <nav className="landing__footer-nav" aria-label="Footer">
               <a className="landing__nav-link" href="#components">Components</a>
               <a className="landing__nav-link" href="#install" onClick={scrollToInstall}>Install</a>
-              <a className="landing__nav-link" href={componentsHref}>Storybook</a>
+              <a className="landing__nav-link" href={componentsHref} target="_blank" rel="noreferrer">Storybook</a>
             </nav>
             <div className="landing__footer-meta">
               <p className="april-text-style april-text-style--text-sm-regular">April {version} · © elescript</p>
