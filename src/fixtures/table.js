@@ -87,5 +87,3 @@ export const TABLE_ROWS = [
     createdOn: "2026-05-20T10:20:05",
   },
 ];
-
-export const DEFAULT_TABLE_COLUMNS = TABLE_COLUMNS;

@@ -17,15 +17,13 @@ const SHORT_MONTH_LOOKUP = Object.fromEntries(
   SHORT_MONTH_NAMES.map((name, index) => [name.toLowerCase(), index])
 );
 
-/** Listing table datetime — e.g. `07 Apr-26 03:30 PM` */
+/** Display datetime — e.g. `07 Apr-26 03:30 PM` */
 const LISTING_DATETIME_RE = /^(\d{1,2})\s+([A-Za-z]{3})-(\d{2,4})\s+(\d{1,2}):(\d{2})\s+(AM|PM)$/i;
 
-/** Listing date-only — e.g. `7 Apr-2026` */
+/** Display date — e.g. `7 Apr-2026` */
 const LISTING_DATE_RE = /^(\d{1,2})\s+([A-Za-z]{3})-(\d{4})$/;
 
-const TABLE_DATE_ONLY_COLUMNS = new Set(["dateJoined", "invoiceDate", "taxPeriod"]);
-
-const TABLE_DATETIME_COLUMNS = new Set(["createdOn", "lastActive", "dueDate", "paymentDate"]);
+const TABLE_DATETIME_COLUMNS = new Set(["createdOn"]);
 
 function isAlreadyFormattedListingDateTime(value) {
   return typeof value === "string" && LISTING_DATETIME_RE.test(value.trim());
@@ -71,7 +69,7 @@ function parseListingDate(text) {
   return Number.isNaN(parsed.getTime()) ? null : parsed;
 }
 
-export function parseListingDateTime(text) {
+function parseListingDateTime(text) {
   const match = String(text).trim().match(LISTING_DATETIME_RE);
   if (!match) return null;
 
@@ -113,7 +111,7 @@ export function formatAprilDateTime(value) {
   return `${day} ${month}-${year} ${String(hours12).padStart(2, "0")}:${minutes} ${period}`;
 }
 
-/** Listing date-only — e.g. `7 Apr-2026`. */
+/** Display date — e.g. `7 Apr-2026`. */
 export function formatAprilShortDate(value) {
   if (value == null || value === "") return "—";
   if (isAlreadyFormattedListingDate(value)) return String(value).trim();
@@ -131,29 +129,17 @@ export function formatAprilShortDate(value) {
 }
 
 export function isTableDateColumn(columnId) {
-  return TABLE_DATE_ONLY_COLUMNS.has(columnId) || TABLE_DATETIME_COLUMNS.has(columnId);
+  return TABLE_DATETIME_COLUMNS.has(columnId);
 }
 
-/** Table cell dates — datetime vs date-only based on column id. */
+/** Table cell dates. A timestamp stays a timestamp; a date-only value stays a date. */
 export function formatTableDateValue(columnId, value) {
   if (value == null || value === "") return "—";
+  if (!TABLE_DATETIME_COLUMNS.has(columnId)) return value ?? "—";
 
-  if (TABLE_DATE_ONLY_COLUMNS.has(columnId)) {
-    return formatAprilShortDate(value);
-  }
-
-  // Accept a full timestamp or a date-only value.
-  if (columnId === "createdOn" || columnId === "lastActive") {
-    const text = String(value).trim();
-    if (text.includes("T") || /^\d{4}-\d{2}-\d{2}/.test(text) || isAlreadyFormattedListingDateTime(text)) {
-      return formatAprilDateTime(value);
-    }
-    return formatAprilShortDate(value);
-  }
-
-  if (TABLE_DATETIME_COLUMNS.has(columnId)) {
+  const text = String(value).trim();
+  if (text.includes("T") || /^\d{4}-\d{2}-\d{2}/.test(text) || isAlreadyFormattedListingDateTime(text)) {
     return formatAprilDateTime(value);
   }
-
-  return value ?? "—";
+  return formatAprilShortDate(value);
 }

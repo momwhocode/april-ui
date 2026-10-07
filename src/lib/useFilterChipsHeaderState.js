@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { createColumnToggleHandler, defaultVisibleColumnIds, toggleableColumns } from "./tableColumns.js";
 
-/** Shared filter-chips-header state for listing shells and Storybook demos. */
+/** Shared filter, search, and column-visibility state. */
 export function useFilterChipsHeaderState({
   columns = [],
   initialFilterValues = {},

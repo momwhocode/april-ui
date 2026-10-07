@@ -1,6 +1,6 @@
 import { FilterChipsHeaderDemo } from "../_helpers/filterChipsHeaderStory.jsx";
 import { Table } from "../../april/components/Table.jsx";
-import { DEFAULT_TABLE_COLUMNS, TABLE_ROWS } from "../../fixtures/table.js";
+import { TABLE_COLUMNS, TABLE_ROWS } from "../../fixtures/table.js";
 import {
   TABLE_LOADED_ROWS_MAX,
   TABLE_LOADED_ROWS_MIN,
@@ -68,14 +68,14 @@ export const Playground = {
         {args.showFilterChipsHeader ? (
           <FilterChipsHeaderDemo
             id="table-story-filters"
-            columns={DEFAULT_TABLE_COLUMNS}
+            columns={TABLE_COLUMNS}
             showSearch={args.showSearch}
             showColumnsButton={args.showColumnsButton}
           />
         ) : null}
         <Table
           type={args.state}
-          columns={DEFAULT_TABLE_COLUMNS}
+          columns={TABLE_COLUMNS}
           rows={TABLE_ROWS}
           loadedRows={args.loadedRows}
         />

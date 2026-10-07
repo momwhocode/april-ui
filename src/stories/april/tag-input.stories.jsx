@@ -58,7 +58,7 @@ export const Interactive = {
     fullWidth: true,
   },
   render: function TagInputInteractiveStory(args) {
-    const [tags, setTags] = useState(["JEE 2027", "High Income"]);
+    const [tags, setTags] = useState(["Design", "Research"]);
     return (
       <StoryFrame width="min(100%, 360px)">
         <TagInput {...args} tags={tags} onChange={setTags} />

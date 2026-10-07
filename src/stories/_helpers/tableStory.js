@@ -2,8 +2,6 @@ import { TABLE_ROWS } from "../../fixtures/table.js";
 
 /** Table story constants — Storybook only. */
 
-export { DEFAULT_TABLE_COLUMNS } from "../../fixtures/table.js";
-
 export const TABLE_PLAYGROUND_STATES = [
   { value: "default", label: "Default" },
   { value: "loading", label: "Loading" },

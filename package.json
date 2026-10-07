@@ -1,9 +1,9 @@
 {
   "name": "april-ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "April is a React design system. Add the Vite plugin, then use the components.",
   "type": "module",
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "sideEffects": [
     "**/*.css"
   ],

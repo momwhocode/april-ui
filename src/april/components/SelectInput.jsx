@@ -39,6 +39,7 @@ export function SelectInput({
   id: idProp,
   className = "",
   onClick,
+  expanded = false,
 }) {
   const uid = useId();
   const id = idProp || `select-input-${uid}`;
@@ -83,7 +84,8 @@ export function SelectInput({
           id={`${id}-trigger`}
           disabled={disabled}
           aria-busy={isLoading || undefined}
-          aria-haspopup="listbox"
+          aria-haspopup={onClick ? "listbox" : undefined}
+          aria-expanded={onClick ? Boolean(expanded) : undefined}
           onClick={onClick}
           {...mouseBind}
           {...focusBind}

@@ -24,6 +24,9 @@ export function FormSelectField({
   description,
   showDescription = false,
   fullWidth = true,
+  label,
+  showLabel = false,
+  showRequired = false,
 }) {
   const [open, setOpen] = useState(false);
   const [portalStyle, setPortalStyle] = useState(null);
@@ -100,7 +103,9 @@ export function FormSelectField({
     <div ref={rootRef} className="april-form-select-field" id={id}>
       <SelectInput
         id={`${id}-input`}
-        showLabel={false}
+        label={label}
+        showLabel={showLabel}
+        showRequired={showRequired}
         showDescription={showDescription}
         description={description}
         leadingIcon={leadingIcon}
@@ -109,6 +114,7 @@ export function FormSelectField({
         value={selected?.label ?? ""}
         placeholder={placeholder}
         state={state}
+        expanded={open}
         onClick={() => {
           if (!isDisabled) setOpen((wasOpen) => !wasOpen);
         }}

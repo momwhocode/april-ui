@@ -7,7 +7,7 @@ import { useTableScrollOverflow } from "../../lib/useTableScrollOverflow.js";
 import { isSortableColumn } from "../../lib/tableSort.js";
 import { UserAvatar } from "./UserAvatar.jsx";
 import { Button } from "./Button.jsx";
-import { IconButton } from "./IconButton.jsx";
+import { IconMenuDropdown } from "./IconMenuDropdown.jsx";
 import { TableEmpty } from "./TableEmpty.jsx";
 import { Tag } from "./Tag.jsx";
 import {
@@ -203,18 +203,22 @@ function blurOnPointerClick(handler) {
   };
 }
 
-function TableLeadCell({ row, column }) {
+function TableLeadCell({ row, column, rowId, onLeadClick }) {
   return (
     <div className="april-table__lead">
       {column.showAvatar ? <UserAvatar user={row} size="md" /> : null}
-      <Button
-        label={row.name}
-        variant="link"
-        size="md"
-        leadingIcon={false}
-        trailingIcon={false}
-        onClick={blurOnPointerClick()}
-      />
+      {onLeadClick ? (
+        <Button
+          label={row.name}
+          variant="link"
+          size="md"
+          leadingIcon={false}
+          trailingIcon={false}
+          onClick={blurOnPointerClick(() => onLeadClick(row, rowId))}
+        />
+      ) : (
+        <span className="april-table__lead-name">{row.name}</span>
+      )}
     </div>
   );
 }
@@ -341,15 +345,32 @@ function TableHeaderCell({ column, extensions, onSort, selection, getColumnPhase
   );
 }
 
-function TableActionsCell() {
+const DEFAULT_ROW_ACTIONS = [
+  { id: "edit", label: "Edit", leadingIconName: "edit", showLeadingIcon: true },
+  { id: "duplicate", label: "Duplicate", leadingIconName: "content_copy", showLeadingIcon: true },
+  { id: "delete", label: "Delete", leadingIconName: "delete", showLeadingIcon: true, destructive: true },
+];
+
+function TableActionsCell({ row, rowId, rowActions, onRowAction }) {
+  const source = typeof rowActions === "function" ? rowActions(row, rowId) : rowActions || DEFAULT_ROW_ACTIONS;
+  if (!source?.length) return null;
+
+  const items = source.map((item) => ({
+    ...item,
+    onClick: () => {
+      item.onClick?.();
+      onRowAction?.(item.id ?? item.label, row, rowId);
+    },
+  }));
+
   return (
     <div className="april-table__actions">
-      <IconButton
+      <IconMenuDropdown
+        id={`table-row-actions-${rowId}`}
         variant="outlined"
         size="md"
-        icon="more_vert"
-        ariaLabel="Row actions"
-        onClick={blurOnPointerClick()}
+        ariaLabel={`Actions for ${row.name || "row"}`}
+        items={items}
       />
     </div>
   );
@@ -364,6 +385,9 @@ function TableBodyCell({
   getColumnPhase,
   dragHandleProps,
   reorderDisabled,
+  onLeadClick,
+  rowActions,
+  onRowAction,
 }) {
   const classes = tableCellClasses(column, extensions, getColumnPhase?.(column.id));
 
@@ -406,7 +430,7 @@ function TableBodyCell({
   if (column.kind === "lead") {
     return (
       <td className={classes}>
-        <TableLeadCell row={row} column={column} />
+        <TableLeadCell row={row} column={column} rowId={rowId} onLeadClick={onLeadClick} />
       </td>
     );
   }
@@ -422,7 +446,7 @@ function TableBodyCell({
   if (column.kind === "actions") {
     return (
       <td className={classes}>
-        <TableActionsCell />
+        <TableActionsCell row={row} rowId={rowId} rowActions={rowActions} onRowAction={onRowAction} />
       </td>
     );
   }
@@ -471,6 +495,9 @@ function TableDataRow({
   getColumnPhase,
   rowReorderEnabled = false,
   reorderDisabled = false,
+  onLeadClick,
+  rowActions,
+  onRowAction,
 }) {
   const isSelected = selection?.isSelected?.(rowId) ?? Boolean(row.selected);
   const rowClass = `april-table__row${isSelected ? " april-table__row--selected" : ""}`;
@@ -487,6 +514,9 @@ function TableDataRow({
         getColumnPhase={getColumnPhase}
         dragHandleProps={dragHandleProps}
         reorderDisabled={reorderDisabled}
+        onLeadClick={onLeadClick}
+        rowActions={rowActions}
+        onRowAction={onRowAction}
       />
     ));
 
@@ -519,6 +549,9 @@ function TableBody({
   getColumnPhase,
   rowReorderEnabled = false,
   reorderDisabled = false,
+  onLeadClick,
+  rowActions,
+  onRowAction,
 }) {
   if (type === "loading") {
     return Array.from({ length: skeletonRows }, (_, index) => (
@@ -546,6 +579,9 @@ function TableBody({
           getColumnPhase={getColumnPhase}
           rowReorderEnabled={rowReorderEnabled}
           reorderDisabled={reorderDisabled}
+          onLeadClick={onLeadClick}
+          rowActions={rowActions}
+          onRowAction={onRowAction}
         />
       ));
     const skeleton = Array.from({ length: Math.max(0, skeletonRows - resolvedLoadedRows) }, (_, index) => (
@@ -570,6 +606,9 @@ function TableBody({
       getColumnPhase={getColumnPhase}
       rowReorderEnabled={rowReorderEnabled}
       reorderDisabled={reorderDisabled}
+      onLeadClick={onLeadClick}
+      rowActions={rowActions}
+      onRowAction={onRowAction}
     />
   ));
 }
@@ -592,6 +631,9 @@ export function Table({
   className = "",
   /** `{ enabled, disabled, onReorder(orderedIds) }` — drag handle column + row sorting. */
   rowReorder = null,
+  onLeadClick,
+  rowActions,
+  onRowAction,
 }) {
   const isEmpty = type === "empty";
   const rowReorderEnabled = Boolean(rowReorder?.enabled) && type === "default" && rows.length > 1;
@@ -677,6 +719,9 @@ export function Table({
                   getColumnPhase={getColumnPhase}
                   rowReorderEnabled
                   reorderDisabled={reorderDisabled}
+                  onLeadClick={onLeadClick}
+                  rowActions={rowActions}
+                  onRowAction={onRowAction}
                 />
               </SortableContext>
             ) : (
@@ -690,6 +735,9 @@ export function Table({
                 selection={selection}
                 getRowId={getRowId}
                 getColumnPhase={getColumnPhase}
+                onLeadClick={onLeadClick}
+                rowActions={rowActions}
+                onRowAction={onRowAction}
               />
             )}
           </tbody>

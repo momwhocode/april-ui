@@ -47,7 +47,7 @@ export function TableReorderHandle({ label, disabled = false, attributes, listen
   );
 }
 
-/** Sortable `<tr>` wrapper for listing tables. */
+/** Sortable `<tr>` wrapper for data tables. */
 export function SortableTableRow({ rowId, disabled = false, className = "", children }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: rowId,

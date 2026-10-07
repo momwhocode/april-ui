@@ -47,7 +47,7 @@ export const Playground = {
   argTypes: filterChipsHeaderArgTypes,
   args: filterChipsHeaderArgs,
   render: (args) => (
-    <div className="listing-table-shell__table-card" style={{ width: "100%" }}>
+    <div style={{ width: "100%" }}>
       <FilterChipsHeaderDemo {...args} />
     </div>
   ),

@@ -9,7 +9,7 @@ function clampTabCount(count) {
 function resolveTabs({ tabs, tabCount }) {
   const source = tabs || DEFAULT_PAGE_TABS;
   const normalized = source.map((tab) => (typeof tab === "string" ? { label: tab, icon: "add" } : tab));
-  const count = tabCount != null ? clampTabCount(tabCount) : normalized.length;
+  const count = tabCount != null ? clampTabCount(tabCount) : Math.min(normalized.length, TABS_MAX_COUNT);
   return normalized.slice(0, count);
 }
 
@@ -18,7 +18,7 @@ function resolveTabs({ tabs, tabCount }) {
  */
 
 export function Tabs({
-  tabCount = DEFAULT_PAGE_TABS.length,
+  tabCount,
   tabs,
   activeIndex: activeIndexProp = 0,
   onTabChange,
@@ -70,6 +70,7 @@ export function Tabs({
                 onClick={() => selectTab(index)}
                 role="tab"
                 aria-selected={active}
+                aria-controls={`${id}-panel`}
                 data-april-tabs-target="tab"
                 data-index={index}
               />

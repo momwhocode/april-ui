@@ -1,6 +1,6 @@
 export const TAG_INPUT_STATES = ["default", "hover", "active", "focused", "error", "disabled", "loading"];
 
-export const TAG_INPUT_SAMPLE_TAGS = ["JEE 2027", "High Income"];
+export const TAG_INPUT_SAMPLE_TAGS = ["Design", "Research"];
 
 export function resolveTagInputPlaygroundArgs({
   state = "default",

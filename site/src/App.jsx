@@ -1,17 +1,25 @@
-import { useState } from "react";
-import { Alert, AprilProvider, Button, IconButton, Tag, TextInput, version } from "april-ui";
+import { useEffect, useState } from "react";
+import { AprilProvider, IconButton, Tag, bindAprilInteractions, version } from "april-ui";
+import { ComponentStage, isWidePiece, pieces } from "./previews.jsx";
 
 const componentsHref = import.meta.env.DEV ? "http://localhost:6006" : "/components/";
 
-const pieces = ["Button", "Input", "Menu", "Dialog", "Table"];
-
 const installCommand = "npm install april-ui react react-dom react-router-dom";
-const pluginSnippet = `import { aprilUi } from "april-ui/vite"
-plugins: [react(), aprilUi()]`;
+const pluginSnippet = `import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react"
+import { aprilUi } from "april-ui/vite"
+
+export default defineConfig({
+  plugins: [react(), aprilUi()],
+})`;
 const providerSnippet = `import { AprilProvider } from "april-ui"
-<AprilProvider theme="light">
-  <App />
-</AprilProvider>`;
+import { BrowserRouter } from "react-router-dom"
+
+<BrowserRouter>
+  <AprilProvider theme="light">
+    <App />
+  </AprilProvider>
+</BrowserRouter>`;
 
 function CodeBlock({ value }) {
   const [copied, setCopied] = useState(false);
@@ -60,9 +68,9 @@ function CodeBlock({ value }) {
   );
 }
 
-function ActionLink({ href, label, variant = "primary", trailing = false, onClick }) {
+function ActionLink({ href, label, variant = "primary", trailing = false, onClick, className = "" }) {
   return (
-    <a className={`april-btn april-btn--${variant} april-btn--md`} href={href} onClick={onClick}>
+    <a className={`april-btn april-btn--${variant} april-btn--md ${className}`.trim()} href={href} onClick={onClick}>
       <span className="april-btn__label">{label}</span>
       {trailing ? (
         <span className="april-btn__icon material-symbols-outlined april-icon" aria-hidden="true">
@@ -74,112 +82,144 @@ function ActionLink({ href, label, variant = "primary", trailing = false, onClic
 }
 
 function scrollToInstall(event) {
-  if (window.location.hash !== "#install") return;
   event.preventDefault();
-  document.getElementById("install")?.scrollIntoView({ behavior: "smooth" });
+  const target = document.getElementById("install");
+  if (!target) return;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const spacer = document.getElementById("install-spacer");
+  if (spacer) spacer.style.height = "0px";
+  const destination = target.getBoundingClientRect().top + window.scrollY - 24;
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  if (spacer && destination > maxScroll) {
+    spacer.style.height = `${Math.ceil(destination - maxScroll)}px`;
+    void document.documentElement.offsetHeight;
+  }
+  target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  target.classList.remove("landing__steps--active");
+  void target.offsetWidth;
+  target.classList.add("landing__steps--active");
+  if (window.location.hash !== "#install") {
+    window.history.pushState(null, "", "#install");
+  }
 }
 
 export function App() {
   const [theme, setTheme] = useState("light");
-  const [email, setEmail] = useState("ada@april.dev");
-  const [sent, setSent] = useState(false);
+  const [piece, setPiece] = useState("Table");
   const dark = theme === "dark";
+
+  useEffect(() => bindAprilInteractions(document), []);
 
   return (
     <AprilProvider theme={theme}>
       <div className="landing">
         <header className="landing__header">
-          <p className="landing__wordmark april-text-style april-text-style--text-md-semibold">April</p>
-          <Tag type="outlined" label={version} leadingIcon={false} trailingIcon={false} />
-          <nav className="landing__nav" aria-label="Page">
-            <ActionLink href="#install" label="Install" variant="ghost" onClick={scrollToInstall} />
-            <ActionLink href={componentsHref} label="Components" variant="outlined" trailing />
-            <IconButton
-              variant="ghost"
-              icon={dark ? "light_mode" : "dark_mode"}
-              ariaLabel={dark ? "Use light theme" : "Use dark theme"}
-              onClick={() => setTheme(dark ? "light" : "dark")}
-            />
-          </nav>
+          <div className="landing__bar">
+            <p className="landing__wordmark april-text-style april-text-style--text-md-semibold">April</p>
+            <nav className="landing__nav" aria-label="Page">
+              <a className="landing__nav-link" href="#components">Components</a>
+              <a className="landing__nav-link" href="#install" onClick={scrollToInstall}>Install</a>
+              <a className="landing__nav-link" href={componentsHref}>Storybook</a>
+            </nav>
+            <div className="landing__header-actions">
+              <Tag type="outlined" label={version} leadingIcon={false} trailingIcon={false} />
+              <IconButton
+                variant="ghost"
+                icon={dark ? "light_mode" : "dark_mode"}
+                ariaLabel={dark ? "Use light theme" : "Use dark theme"}
+                onClick={() => setTheme(dark ? "light" : "dark")}
+              />
+              <ActionLink className="landing__pill" href={componentsHref} label="Open components" trailing />
+            </div>
+          </div>
         </header>
 
-        <main className="landing__main">
+        <main>
           <section className="landing__hero">
-            <div>
-              <h1 className="landing__title april-text-style april-text-style--display-xs-semibold">
+            <div className="landing__wrap">
+              <h1 className="landing__title april-text-style april-text-style--display-xl-semibold">
                 A React design system you can install
               </h1>
-              <p className="landing__lede april-text-style april-text-style--text-md-regular">
-                Add the Vite plugin, wrap your app, and use the same buttons, inputs, and menus.
-              </p>
-              <div className="landing__actions">
-                <ActionLink href={componentsHref} label="Open components" trailing />
-                <ActionLink href="#install" label="See the install" variant="secondary" onClick={scrollToInstall} />
+              <div className="landing__hero-row">
+                <div className="landing__actions">
+                  <ActionLink className="landing__pill" href={componentsHref} label="Open components" trailing />
+                  <ActionLink className="landing__pill" href="#install" label="See the install" variant="secondary" onClick={scrollToInstall} />
+                </div>
+                <p className="landing__lede april-text-style april-text-style--text-md-regular">
+                  Add the Vite plugin, wrap your app, and use the same buttons, inputs, and menus.
+                </p>
               </div>
             </div>
-
-            <form
-              className="landing__panel"
-              onSubmit={(event) => {
-                event.preventDefault();
-                setSent(true);
-              }}
-            >
-              <div className="landing__tags" aria-hidden="true">
-                {pieces.map((label) => (
-                  <Tag key={label} type="ghost" label={label} leadingIcon={false} trailingIcon={false} />
-                ))}
-              </div>
-              {sent ? (
-                <Alert
-                  color="green"
-                  title="Welcome to April"
-                  description={email}
-                  showButtons={false}
-                  onDismiss={() => setSent(false)}
-                />
-              ) : (
-                <>
-                  <TextInput
-                    label="Email"
-                    type="email"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    placeholder="ada@april.dev"
-                    leadingIcon
-                    leadingIconName="mail"
-                    fullWidth
-                  />
-                  <Button label="Continue" type="submit" fullWidth leadingIcon={false} trailingIcon={false} />
-                </>
-              )}
-            </form>
           </section>
 
-          <section id="install" className="landing__steps" aria-label="Install">
-            <article className="landing__step">
-              <h2 className="april-text-style april-text-style--text-sm-semibold">1. Install</h2>
-              <p className="april-text-style april-text-style--text-sm-regular">React 19 and React Router 7 are peer dependencies.</p>
-              <CodeBlock value={installCommand} />
-            </article>
-            <article className="landing__step">
-              <h2 className="april-text-style april-text-style--text-sm-semibold">2. Add the plugin</h2>
-              <p className="april-text-style april-text-style--text-sm-regular">It injects the stylesheet, Inter, and Material Symbols.</p>
-              <CodeBlock value={pluginSnippet} />
-            </article>
-            <article className="landing__step">
-              <h2 className="april-text-style april-text-style--text-sm-semibold">3. Wrap the app</h2>
-              <p className="april-text-style april-text-style--text-sm-regular">AprilProvider sets the light or dark theme.</p>
-              <CodeBlock value={providerSnippet} />
-            </article>
+          <section id="components" className="landing__catalog" aria-label="Components">
+            <div className="landing__wrap">
+              <p className="landing__kicker april-text-style april-text-style--text-xs-semibold">Components</p>
+              <div className="landing__tabs" role="tablist" aria-label="Component">
+                {pieces.map((label) => {
+                  const selected = piece === label;
+                  return (
+                    <button
+                      key={label}
+                      type="button"
+                      role="tab"
+                      aria-selected={selected}
+                      className={selected ? "landing__tab landing__tab--selected" : "landing__tab"}
+                      onClick={() => setPiece(label)}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className={isWidePiece(piece) ? "landing__canvas landing__canvas--wide" : "landing__canvas"}>
+                <ComponentStage key={piece} piece={piece} />
+              </div>
+            </div>
+          </section>
+
+          <section id="install" className="landing__install" aria-label="Install">
+            <div className="landing__wrap">
+              <h2 className="landing__section-title april-text-style april-text-style--display-md-semibold">
+                Install it in three steps
+              </h2>
+              <div className="landing__steps">
+                <article className="landing__step">
+                  <h3 className="april-text-style april-text-style--text-sm-semibold">1. Install</h3>
+                  <p className="april-text-style april-text-style--text-sm-regular">React 19 and React Router 7 are peer dependencies.</p>
+                  <CodeBlock value={installCommand} />
+                </article>
+                <article className="landing__step">
+                  <h3 className="april-text-style april-text-style--text-sm-semibold">2. Add the plugin</h3>
+                  <p className="april-text-style april-text-style--text-sm-regular">It injects the stylesheet, Inter, and Material Symbols.</p>
+                  <CodeBlock value={pluginSnippet} />
+                </article>
+                <article className="landing__step">
+                  <h3 className="april-text-style april-text-style--text-sm-semibold">3. Wrap the app</h3>
+                  <p className="april-text-style april-text-style--text-sm-regular">AprilProvider sets the light or dark theme.</p>
+                  <CodeBlock value={providerSnippet} />
+                </article>
+              </div>
+            </div>
           </section>
         </main>
 
         <footer className="landing__footer">
-          <p className="april-text-style april-text-style--text-sm-regular">April {version}</p>
-          <p className="april-text-style april-text-style--text-sm-regular">MIT</p>
+          <div className="landing__wrap landing__footer-row">
+            <p className="april-text-style april-text-style--text-sm-semibold">April</p>
+            <nav className="landing__footer-nav" aria-label="Footer">
+              <a className="landing__nav-link" href="#components">Components</a>
+              <a className="landing__nav-link" href="#install" onClick={scrollToInstall}>Install</a>
+              <a className="landing__nav-link" href={componentsHref}>Storybook</a>
+            </nav>
+            <div className="landing__footer-meta">
+              <p className="april-text-style april-text-style--text-sm-regular">April {version} · © elescript</p>
+              <p className="april-text-style april-text-style--text-sm-regular">Designed by elescript</p>
+            </div>
+          </div>
         </footer>
       </div>
+      <div id="install-spacer" className="landing__spacer" />
     </AprilProvider>
   );
 }

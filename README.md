@@ -2,9 +2,11 @@
 
 April is a React design system. Install the package, add the Vite plugin, and use the components.
 
-**Current version: 0.1.0**
+**Current version: 0.2.0**
 
 Storybook lists the components. Run `npm run dev` for a local copy on port 6006.
+
+April is owned by elescript. You may use it in your own applications. Selling, sublicensing, or redistributing the library itself needs written permission from elescript. The full terms are in [LICENSE](LICENSE).
 
 [![April](docs/components.png)](https://april-ui.vercel.app/)
 
@@ -21,7 +23,7 @@ April follows [semantic versioning](https://semver.org/).
 `0.x` releases can still change between minors. Pin the version when you need a fixed look:
 
 ```bash
-npm install april-ui@0.1.0
+npm install april-ui@0.2.0
 ```
 
 Check what an app is running:
@@ -33,13 +35,13 @@ npm ls april-ui
 ```tsx
 import { version } from 'april-ui'
 
-console.log(version) // "0.1.0"
+console.log(version) // "0.2.0"
 ```
 
 The Vite plugin also writes the release into the page:
 
 ```html
-<meta name="april-ui-version" content="0.1.0" />
+<meta name="april-ui-version" content="0.2.0" />
 ```
 
 ## Integrate

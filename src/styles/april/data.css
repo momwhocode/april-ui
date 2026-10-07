@@ -469,6 +469,18 @@
   white-space: nowrap;
 }
 
+.april-table__lead-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  font-family: var(--typography-text-sm-semibold-font-family);
+  font-size: var(--typography-text-sm-semibold-font-size);
+  font-weight: var(--typography-text-sm-semibold-font-weight);
+  line-height: var(--typography-text-sm-semibold-line-height);
+  color: var(--color-foreground-text-primary, #111827);
+}
+
 .april-table__lead,
 .april-table__person {
   display: inline-flex;
