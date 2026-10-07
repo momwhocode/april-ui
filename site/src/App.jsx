@@ -218,10 +218,7 @@ export function App() {
               <a className="landing__nav-link" href="#install" onClick={scrollToInstall}>Install</a>
               <a className="landing__nav-link" href={componentsHref} target="_blank" rel="noreferrer">Storybook</a>
             </nav>
-            <div className="landing__footer-meta">
-              <p className="april-text-style april-text-style--text-sm-regular">April {version} · © elescript</p>
-              <p className="april-text-style april-text-style--text-sm-regular">Designed by elescript</p>
-            </div>
+            <p className="april-text-style april-text-style--text-sm-regular">Designed by elescript</p>
           </div>
         </footer>
       </div>
